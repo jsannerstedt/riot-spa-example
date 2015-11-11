@@ -1,0 +1,23 @@
+{
+  "name": "riot-spa-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "browserify -t [riotify] -e src/index.js -o dist/index.js -d",
+    "build:css": "cat style/main.css | cleancss -o dist/main.css",
+    "dev": "npm run build && light-server -s . -p 1337 -w 'src/**/*.js, **/*.html, src/**/*.tag # npm run build:js' -w 'style/*.css # npm run build:css # reloadcss'"
+  },
+  "author": "joel.sannerstedt@gmail.com",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "clean-css": "^3.4.5",
+    "light-server": "^1.0.6",
+    "riot": "^2.2.4",
+    "riotify": "^0.1.2"
+  }
+}
