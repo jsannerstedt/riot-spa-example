@@ -4,12 +4,10 @@
     </ul>
 
     <script>
-        var menuItems = require('../../config/menu');
-        var riot = require('riot');
-        this.items = menuItems.map(item => ({name: item, href: '/' + item}));
+        const menuItems = require('../config/menu');
+        const actions = require('../actions');
 
-        this.navigate = function(e) {
-            riot.route(e.target.pathname);
-        }
+        this.items = menuItems.map(item => ({name: item, href: '#' + item}));
+        this.navigate = e => actions.navigate(e.target.hash.slice(1));
     </script>
 </my-menu>
