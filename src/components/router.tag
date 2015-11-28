@@ -1,30 +1,27 @@
 <my-router>
-    <div id="content">
+    <div name="content">
 
     </div>
 
-    <script>
-        var currentRoute = this.opts.state.route;
-        var currentTag;
-
-        // first load
-        this.one('mount', () => mount(this.opts.state));
+    <script type="text/babel">
+        let currentTag, currentView;
 
         // whenever state is updated
-        this.on('update', route.bind(this));
-
-        function route() {
-            if(currentRoute !== this.opts.state.route){
-                mount(this.opts.state);
+        this.on('update', () => {
+            const state = this.opts.state;
+            const viewName = state.route.activeView;
+            if (currentView === viewName) {
+                currentTag.opts.state = state;
+                currentTag.update();
+                return;
             }
-        }
-
-        function mount(state) {
-            const viewName = state.route.activeView + '-view';
-            if(currentTag){
+            if (currentTag) {
                 currentTag.unmount(true);
             }
-            currentTag = riot.mount('#content', viewName, {state: state})[0];
-        }
+            if (viewName) {
+                currentTag = riot.mount(this.content, viewName + '-view', {state: state})[0];
+                currentView = viewName;
+            }
+        });
     </script>
 </my-router>

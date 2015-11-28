@@ -3,15 +3,20 @@
 require('./app.tag');
 require('./components');
 require('./views');
+require('./actionHandlers');
 const riot = require('riot');
-const createStore = require('./store');
+const createStore = require('./dedux').createStore;
 const reducers = require('./reducers');
 const actions = require('./actions');
-const store = createStore(reducers);
+const store = createStore(reducers, actions);
 
-actions.routeChange(window.location.hash.slice(1) || 'home');
+// routing
+riot.route(route => actions.routeChange(route));
+riot.route.start(true);
 
 const app = riot.mount('my-app', {state: store.getState()})[0];
 
-store.subscribe(state => app.update({state: state}));
-
+store.subscribe(state => {
+    app.opts.state = state;
+    app.update();
+});

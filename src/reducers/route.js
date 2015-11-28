@@ -1,10 +1,8 @@
 'use strict';
 
-var utils = require('../utils');
+const homeRoute = 'home';
 
 module.exports = {
-    initialState: () => ({activeView: 'home'}),
-    routeChange: (state, payload) => ({
-        activeView: payload
-    })
+    initialState: () => ({activeView: homeRoute}),
+    routeChange: payload => ({activeView: payload || homeRoute})
 };

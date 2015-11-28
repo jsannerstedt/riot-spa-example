@@ -1,15 +1,9 @@
 'use strict';
 
-module.exports = createMap([
-    require('./navigation')
-]);
+const actions = require('../actions');
+const utils = require('../utils');
+const handlers = [require('./navigation')];
 
-// only one action handler per action atm
-function createMap(array) {
-    return array.reduce((previous, actionHandlers) => {
-        return Object.keys(actionHandlers).reduce((map, key) => {
-            map[key] = actionHandlers[key];
-            return map;
-        }, previous);
-    }, {});
-}
+handlers.forEach(handler => {
+    utils.forOwn(handler, (callback, key) => actions[key].subscribe(callback));
+});
