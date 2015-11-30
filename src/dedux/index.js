@@ -7,7 +7,8 @@ const UPDATE = 'update';
 
 module.exports = {
     createStore,
-    createActions
+    createActions,
+    combineReducers
 };
 
 function createStore(reducers, actions, initialState) {
@@ -100,4 +101,15 @@ function getSubscriptionFunction(events) {
             unsubscribe: () => events.off(UPDATE, callback)
         };
     };
+}
+
+function combineReducers(obj) {
+    return Object.keys(obj).reduce((map, key) => {
+        return Object.keys(obj[key]).reduce((reducerMap, reducerName) => {
+            reducerMap[reducerName] = reducerMap[reducerName] || [];
+            reducerMap[reducerName].push(obj[key][reducerName]);
+            obj[key][reducerName].namespace = key;
+            return reducerMap;
+        }, map);
+    }, {});
 }
