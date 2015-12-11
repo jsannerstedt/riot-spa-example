@@ -1,9 +1,9 @@
 'use strict';
 
-const actions = require('../actions');
-const utils = require('../utils');
-const handlers = [require('./navigation')];
+import actions from '../actions';
+import { forOwn } from '../utils';
+import navigation from'./navigation';
 
-handlers.forEach(handler => {
-    utils.forOwn(handler, (callback, key) => actions[key].subscribe(callback));
+[navigation].forEach(handler => {
+  forOwn(handler, (callback, key) => actions[key].subscribe(callback));
 });

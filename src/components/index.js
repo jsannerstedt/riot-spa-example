@@ -1,4 +1,4 @@
 'use strict';
 
-require('./menu.tag');
-require('./router.tag');
+import './menu.tag';
+import './router.tag';

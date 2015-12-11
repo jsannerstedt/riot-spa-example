@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "no-console": 0,
+    "strict": 0,
+    "no-use-before-define": 0,
+    "comma-dangle": 0,
+    "func-names": 0
+  },
+  "extends": "airbnb/base"
+}

@@ -1,9 +1,9 @@
 'use strict';
 
-var createActions = require('../dedux').createActions;
+import { createActions } from '../dedux';
 
-module.exports = createActions([
-    // navigation
-    'navigate',
-    'routeChange'
+export default createActions([
+  // navigation
+  'navigate',
+  'routeChange'
 ]);

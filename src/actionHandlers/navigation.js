@@ -1,7 +1,7 @@
 'use strict';
 
-const riot = require('riot');
+import riot from 'riot';
 
-module.exports = {
-    navigate: (payload) => riot.route(payload)
+export default {
+  navigate: (payload) => riot.route(payload)
 };

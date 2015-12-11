@@ -2,7 +2,7 @@
 
 const homeRoute = 'home';
 
-module.exports = {
-    initialState: () => ({activeView: homeRoute}),
-    routeChange: payload => ({activeView: payload || homeRoute})
+export default {
+  initialState: () => ({ activeView: homeRoute }),
+  routeChange: payload => ({ activeView: payload || homeRoute })
 };

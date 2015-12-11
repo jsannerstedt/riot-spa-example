@@ -1,7 +1,6 @@
 'use strict';
 
-const combineReducers = require('../dedux').combineReducers;
+import { combineReducers } from '../dedux';
+import route from './route';
 
-module.exports = combineReducers({
-    route: require('./route')
-});
+export default combineReducers({ route });

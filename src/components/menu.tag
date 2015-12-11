@@ -4,8 +4,8 @@
     </ul>
 
     <script type="text/babel">
-        const menuItems = require('../config/menu');
-        const actions = require('../actions');
+        import menuItems from '../config/menu';
+        import actions from '../actions';
 
         this.items = menuItems.map(item => ({name: item, href: '#' + item, navigate: this.navigate}));
         this.navigate = e => actions.navigate(e.target.hash.slice(1));
