@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:js": "watchify -t [ riotify --compact ] -t [ babelify --presets [ es2015 ] --plugins [ transform-es2015-modules-commonjs ] ] -t [ envify --NODE_ENV development] -e src/index.js -v -d -o 'exorcist dist/index.js.map > dist/index.js'",
+    "build:js": "watchify -t [ riotify --compact ] -t [ babelify ] -t [ envify --NODE_ENV development] -e src/index.js -v -d -o 'exorcist dist/index.js.map > dist/index.js'",
     "build:css": "cat style/main.css | cleancss -o dist/main.css",
     "server": "light-server -s . -p 1337 -w 'index.html' -w 'dist/index.js' -w 'style/**/*.css # npm run build:css # reloadcss'",
     "dev": "npm run build:js & npm run build:css & npm run server"
@@ -14,8 +14,8 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
     "babel-preset-es2015": "^6.3.13",
+    "babel-preset-es2015-riot": "^1.0.0",
     "babelify": "^7.2.0",
     "clean-css": "^3.4.5",
     "envify": "^3.4.0",

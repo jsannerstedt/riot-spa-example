@@ -1,16 +1,16 @@
 'use strict';
 
-import storage from './storage';
-import riot from 'riot';
-import utils from './utils';
+import * as storage from './storage';
+import * as riot from 'riot';
+import { forOwn, extend, debounce, getSubscriptionFunction } from './utils';
 
 export default function createStore(reducers, actions, initialState) {
   const events = riot.observable();
-  const debouncedNotify = utils.debounce(notify, 1);
-  const subscribe = utils.getSubscriptionFunction(events);
+  const debouncedNotify = debounce(notify, 1);
+  const subscribe = getSubscriptionFunction(events);
   let state = {};
 
-  utils.forOwn(actions, (action, name) => {
+  forOwn(actions, (action, name) => {
     action.subscribe(value => {
       updateState(name, value);
     });
@@ -20,7 +20,7 @@ export default function createStore(reducers, actions, initialState) {
     state = storage.get('state');
   }
 
-  state = utils.extend(calculateNewState('initialState'), initialState, state);
+  state = extend(calculateNewState('initialState'), initialState, state);
 
   return {
     subscribe,
@@ -57,8 +57,8 @@ export default function createStore(reducers, actions, initialState) {
   function calculateNewState(action, payload) {
     return reducers[action].reduce(
       (previous, reducer) =>
-        utils.extend(previous, {
-          [reducer.namespace]: utils.extend(state[reducer.namespace], reducer(payload, state[reducer.namespace]))
+        extend(previous, {
+          [reducer.namespace]: extend(state[reducer.namespace], reducer(payload, state[reducer.namespace]))
         }),
       state || {}
     );

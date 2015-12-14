@@ -1,7 +1,7 @@
 'use strict';
 
 import riot from 'riot';
-import utils from './utils';
+import { getSubscriptionFunction} from './utils';
 
 export default function createActions(actionNames) {
   return actionNames.reduce((actions, name) => {
@@ -19,7 +19,7 @@ export default function createActions(actionNames) {
 
     func.actionName = name;
 
-    func.subscribe = utils.getSubscriptionFunction(events);
+    func.subscribe = getSubscriptionFunction(events);
 
     return func;
   }

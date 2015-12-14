@@ -1,5 +1,5 @@
 'use strict';
 
-require('./home.tag');
-require('./details.tag');
-require('./about.tag');
+import './home.tag';
+import './details.tag';
+import './about.tag';
