@@ -2,6 +2,6 @@
 
 export default [
   'home',
-  'details',
+  'async',
   'about'
 ];
