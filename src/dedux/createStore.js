@@ -1,6 +1,6 @@
 'use strict';
 
-import * as storage from './storage';
+import storage from './storage';
 import * as riot from 'riot';
 import { forOwn, extend, debounce, getSubscriptionFunction } from './utils';
 

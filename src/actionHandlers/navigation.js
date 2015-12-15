@@ -1,7 +1,7 @@
 'use strict';
 
-import riot from 'riot';
+import * as riot from 'riot';
 
 export default {
-  navigate: (payload) => riot.route(payload)
+  navigate: payload => riot.route(payload)
 };

@@ -1,7 +1,7 @@
 'use strict';
 
-import riot from 'riot';
-import { getSubscriptionFunction} from './utils';
+import * as riot from 'riot';
+import { getSubscriptionFunction } from './utils';
 
 export default function createActions(actionNames) {
   return actionNames.reduce((actions, name) => {

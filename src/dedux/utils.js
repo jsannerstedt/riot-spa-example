@@ -17,6 +17,7 @@ function debounce(cb, ms) {
     timeout = setTimeout(cb, ms);
   };
 }
+
 function getSubscriptionFunction(events) {
   return function subscribe(callback) {
     events.on('update', callback);
@@ -25,6 +26,7 @@ function getSubscriptionFunction(events) {
     };
   };
 }
+
 function forOwn(object, cb) {
   let i;
   if (!object) {
@@ -36,6 +38,7 @@ function forOwn(object, cb) {
     }
   }
 }
+
 function extend(...args) {
   return Object.assign({}, ...args);
 }

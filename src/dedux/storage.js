@@ -1,6 +1,6 @@
 'use strict';
 
-export { get, set };
+export default { get, set };
 
 function set(key, value) {
   if (typeof localStorage === 'undefined') {
