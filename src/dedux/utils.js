@@ -4,8 +4,28 @@ export {
   extend,
   forOwn,
   getSubscriptionFunction,
-  debounce
+  debounce,
+  createEventStore
 };
+
+function createEventStore() {
+  const listeners = [];
+
+  return {
+    on: callback => {
+      listeners.push(callback);
+      return () => off(callback);
+    },
+    trigger: data => listeners.forEach(listener => listener(data))
+  };
+
+  function off(cb) {
+    const index = listeners.indexOf(cb);
+    if (index > -1) {
+      listeners.splice(index, 1);
+    }
+  }
+}
 
 function debounce(cb, ms) {
   let timeout;

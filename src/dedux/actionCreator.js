@@ -1,7 +1,6 @@
 'use strict';
 
-import * as riot from 'riot';
-import { getSubscriptionFunction } from './utils';
+import { createEventStore } from './utils';
 
 export default function createActions(actionNames) {
   return actionNames.reduce((actions, name) => {
@@ -10,16 +9,15 @@ export default function createActions(actionNames) {
   }, {});
 
   function getAction(name) {
-    const events = riot.observable();
+    const events = createEventStore();
     const func = function runAction(data) {
-      // console.log('action: ' + name, data);
-      events.trigger('update', data);
+      events.trigger(data);
       return data;
     };
 
     func.actionName = name;
 
-    func.subscribe = getSubscriptionFunction(events);
+    func.subscribe = events.on;
 
     return func;
   }
