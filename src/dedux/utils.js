@@ -3,7 +3,6 @@
 export {
   extend,
   forOwn,
-  getSubscriptionFunction,
   debounce,
   createEventStore
 };
@@ -35,15 +34,6 @@ function debounce(cb, ms) {
       clearTimeout(timeout);
     }
     timeout = setTimeout(cb, ms);
-  };
-}
-
-function getSubscriptionFunction(events) {
-  return function subscribe(callback) {
-    events.on('update', callback);
-    return {
-      unsubscribe: () => events.off('update', callback)
-    };
   };
 }
 
