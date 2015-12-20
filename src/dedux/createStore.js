@@ -32,7 +32,7 @@ export default (reducers, actions, initialState) => {
   function calculateNewState(action, payload) {
     return reducers[action].reduce((previous, reducer) =>
         extend(previous, {
-          [reducer.namespace]: extend(state[reducer.namespace], reducer(payload, state[reducer.namespace]))
+          [reducer.namespace]: extend(previous[reducer.namespace], reducer(payload, previous[reducer.namespace]))
         }),
       state || {}
     );
