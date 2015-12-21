@@ -1,12 +1,6 @@
 'use strict';
 
 import { createActions } from '../dedux';
+import reducers from '../reducers';
 
-export default createActions([
-  // navigation
-  'navigate',
-  'routeChange',
-
-  'doAsync',
-  'doAsyncSuccess'
-]);
+export default createActions(Object.keys(reducers));
