@@ -3,7 +3,11 @@
 export default (routes, handleRoute) => {
   const use = (req, res, next) => {
     const result = match(req.url);
-    handleRoute(() => result(), req, res, next);
+    if (result) {
+      handleRoute(() => result(), req, res, next);
+    } else {
+      next();
+    }
   };
 
   use.match = match;
@@ -14,8 +18,6 @@ export default (routes, handleRoute) => {
     if (routes[url]) {
       return routes[url];
     }
-    return () => {
-      console.log(url);
-    };
+    return false;
   }
 };

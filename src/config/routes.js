@@ -1,6 +1,6 @@
 'use strict';
 
-import actions from './src/actions';
+import actions from '../actions';
 
 export default {
   '/': () => [

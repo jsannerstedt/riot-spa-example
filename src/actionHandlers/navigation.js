@@ -1,7 +1,7 @@
 'use strict';
 
-import createRouter from '../../router';
-import routes from '../../routes';
+import createRouter from '../utils/router';
+import routes from '../config/routes';
 const router = createRouter(routes);
 
 export default {

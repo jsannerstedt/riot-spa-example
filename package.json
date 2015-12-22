@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:js & npm run build:css",
     "build:js": "watchify -t [ riotify --compact ] -t [ babelify ] -t [ envify --NODE_ENV development] -e src/index.js -v -d -o 'exorcist dist/index.js.map > dist/index.js'",
     "build:css": "cat style/main.css | cleancss -o dist/main.css",
-    "server": "light-server -s . -p 1337 -w 'index.html' -w 'dist/index.js' -w 'style/**/*.css # npm run build:css # reloadcss'",
-    "dev": "npm run build:js & npm run build:css & npm run server"
+    "client-server": "light-server -s . -p 1337 -w 'index.html' -w 'dist/index.js' -w 'style/**/*.css # npm run build:css # reloadcss'",
+    "dev": "npm run build:js & npm run build:css & npm run client-server",
+    "server": "npm run build & nodemon server/app.js --watch dist --watch server"
   },
   "author": "joel.sannerstedt@gmail.com",
   "license": "ISC",
@@ -26,6 +28,7 @@
     "eslint-config-airbnb": "^2.0.0",
     "exorcist": "^0.4.0",
     "light-server": "^1.0.6",
+    "nodemon": "^1.8.1",
     "riot": "^2.2.4",
     "riotify": "^0.1.2",
     "watchify": "^3.6.1"
