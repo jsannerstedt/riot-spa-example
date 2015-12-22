@@ -7,7 +7,7 @@
         const menuItems = require('../config/menu').default;
         const actions = require('../actions').default;
 
-        this.items = menuItems.map(item => ({name: item, href: '#' + item, navigate: this.navigate}));
-        this.navigate = e => actions.navigate(e.target.hash.slice(1));
+        this.navigate = e => actions.navigate(e.item.href);
+        this.items = menuItems.map(item => ({name: item, href: '/' + item, navigate: this.navigate}));
     </script>
 </my-menu>

@@ -1,7 +1,9 @@
 'use strict';
 
-import * as riot from 'riot';
-
 export default {
-  navigate: payload => riot.route(payload)
+  navigate: payload => {
+    if (typeof history !== 'undefined') {
+      history.pushState(null, null, payload);
+    }
+  }
 };

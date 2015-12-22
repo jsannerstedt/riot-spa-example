@@ -12,7 +12,10 @@
   },
   "author": "joel.sannerstedt@gmail.com",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "babel-register": "^6.3.13",
+    "express": "^4.13.3"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-es2015-riot": "^1.0.0",
