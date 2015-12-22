@@ -3,6 +3,7 @@
 const homeRoute = 'home';
 
 export default {
-  initialState: () => ({ activeView: homeRoute }),
-  navigate: payload => ({ activeView: payload.slice(1) || homeRoute })
+  initialState: () => ({ activeView: homeRoute, isNavigating: false }),
+  navigate: () => ({ isNavigating: true }),
+  routeChange: payload => ({ isNavigating: false, activeView: payload.slice(1) || homeRoute })
 };

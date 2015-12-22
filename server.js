@@ -6,6 +6,8 @@ import './src/views';
 import './src/components';
 import appTag from './src/app.tag';
 import { createStore } from './src/dedux/';
+import router from './router';
+import routes from './routes';
 import reducers from './src/reducers';
 import actions from './src/actions';
 
@@ -13,11 +15,12 @@ export default port => {
   const app = express();
 
   app.use('/dist', express.static('dist'));
+  app.use(router(routes, handleRoute));
   app.use(handleRender);
   app.listen(port);
 
   function handleRender(req, res) {
-    const state = getState(req);
+    const state = req.initialState;
     const html = riot.render(appTag, { state: state });
 
     res.send(renderFullPage(html, JSON.stringify(state)));
@@ -39,9 +42,10 @@ export default port => {
             </html>`;
   }
 
-  function getState(req) {
+  function handleRoute(result, req, res, next) {
     const store = createStore(reducers, actions);
-    actions.navigate(req.originalUrl);
-    return store.getState();
+    result();
+    req.initialState = store.getState();
+    next();
   }
 };
