@@ -3,5 +3,10 @@
 import actions from '../actions';
 
 export default {
-  doAsync: () => setTimeout(() => actions.doAsyncSuccess(), 1000)
+  doAsync: () => new Promise(resolve => {
+    setTimeout(() => {
+      actions.doAsyncSuccess();
+      resolve();
+    }, 1000);
+  })
 };

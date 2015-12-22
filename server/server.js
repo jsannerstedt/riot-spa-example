@@ -47,7 +47,11 @@ function renderFullPage(html, initialState) {
 
 function handleRoute(result, req, res, next) {
   const store = createStore(reducers, actions);
-  result();
-  req.initialState = store.getState();
-  next();
+  const promises = result();
+  Promise.all(promises)
+    .then(() => {
+      req.initialState = store.getState();
+      next();
+    })
+    .catch(next);
 }

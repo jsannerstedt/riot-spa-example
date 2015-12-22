@@ -1,6 +1,7 @@
 'use strict';
 
 import actions from '../actions';
+import actionHandlers from '../actionHandlers';
 
 export default {
   '/': () => [
@@ -13,6 +14,7 @@ export default {
     actions.routeChange('/about')
   ],
   '/async': () => [
-    actions.routeChange('/async')
+    actions.routeChange('/async'),
+    actionHandlers.async.doAsync()
   ]
 };

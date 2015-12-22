@@ -4,7 +4,7 @@ export default (routes, handleRoute) => {
   const use = (req, res, next) => {
     const result = match(req.url);
     if (result) {
-      handleRoute(() => result(), req, res, next);
+      handleRoute(result, req, res, next);
     } else {
       next();
     }

@@ -5,6 +5,10 @@ import { forOwn } from '../utils';
 import navigation from'./navigation';
 import async from './doSomethingAsync';
 
-[navigation, async].forEach(handler =>
-  forOwn(handler, (callback, key) => actions[key].subscribe(callback))
+const actionHandlers = { navigation, async };
+
+Object.keys({ navigation, async }).forEach(name =>
+  forOwn(actionHandlers[name], (callback, key) => actions[key].subscribe(callback))
 );
+
+export default actionHandlers;
