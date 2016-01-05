@@ -15,6 +15,7 @@ export default (routes, handleRoute) => {
   return use;
 
   function match(url) {
+    // TODO: use regex to support params
     if (routes[url]) {
       return routes[url];
     }

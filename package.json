@@ -23,6 +23,7 @@
     "babel-preset-es2015-riot": "^1.0.0",
     "babelify": "^7.2.0",
     "clean-css": "^3.4.5",
+    "dedux": "https://github.com/jsannerstedt/dedux/archive/v1.0-beta.tar.gz",
     "envify": "^3.4.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.0.0",

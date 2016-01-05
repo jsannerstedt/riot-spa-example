@@ -5,10 +5,10 @@ import riot from 'riot';
 import '../src/views';
 import '../src/components';
 import appTag from '../src/app.tag';
-import { createStore } from '../src/dedux/';
+import { createStore } from 'dedux';
 import router from '../src/utils/router';
 import routes from '../src/config/routes';
-import reducers from '../src/reducers';
+import modifiers from '../src/modifiers';
 import actions from '../src/actions';
 
 export default port => {
@@ -46,7 +46,7 @@ function renderFullPage(html, initialState) {
 }
 
 function handleRoute(result, req, res, next) {
-  const store = createStore(reducers, actions);
+  const store = createStore(modifiers, actions);
   const promises = result();
   Promise.all(promises)
     .then(() => {

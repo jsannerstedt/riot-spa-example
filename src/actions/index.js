@@ -1,6 +1,6 @@
 'use strict';
 
-import { createActions } from '../dedux';
-import reducers from '../reducers';
+import { createActions } from 'dedux';
+import modifiers from '../modifiers';
 
-export default createActions(Object.keys(reducers));
+export default createActions(Object.keys(modifiers));

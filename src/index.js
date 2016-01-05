@@ -5,15 +5,11 @@ import './components';
 import './views';
 import './actionHandlers';
 import riot from 'riot';
-import { createStore } from './dedux';
-import reducers from './reducers';
+import { createStore } from 'dedux';
+import modifiers from './modifiers';
 import actions from './actions';
 
-const store = createStore(reducers, actions, getInitialState());
-
-// routing
-riot.route(route => actions.routeChange(route));
-riot.route.start();
+const store = createStore(modifiers, actions, getInitialState());
 
 const app = riot.mount('my-app', { state: store.getState() })[0];
 
@@ -22,9 +18,7 @@ store.subscribe(state => {
   app.update();
 });
 
-window.addEventListener('popstate', () => {
-  actions.routeChange(location.pathname);
-});
+window.addEventListener('popstate', actions.routeChange(location.pathname));
 
 function getInitialState() {
   const data = document.getElementById('initial_state').innerHTML;
