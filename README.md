@@ -6,5 +6,5 @@ Simple riot app for server and client side rendering, with shared routes etc...
     npm install
     npm run server
 
-For more info on the architecture, see [dedux](https://github.com/jsannerstedt/dedux/archive/v1.0-beta.tar.gz).
+For more info on the architecture, see [dedux](https://github.com/jsannerstedt/dedux).
 
