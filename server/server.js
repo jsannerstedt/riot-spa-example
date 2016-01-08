@@ -33,14 +33,14 @@ function renderFullPage(html, initialState) {
               <head>
                 <meta charset="UTF-8">
                 <title>Title</title>
-                <link rel="stylesheet" href="dist/main.css">
+                <link rel="stylesheet" href="/dist/main.css">
               </head>
               <body>
                 ${ html }
                 <script type="application/json" id="initial_state">
                   ${ initialState }
                 </script>
-                <script type="text/javascript" src="dist/index.js"></script>
+                <script type="text/javascript" src="/dist/index.js"></script>
               </body>
             </html>`;
 }
