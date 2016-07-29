@@ -1,12 +1,6 @@
-'use strict';
-
-import actions from '../actions';
-
 export default {
-  doAsync: () => new Promise(resolve => {
+  doAsync: actions =>
     setTimeout(() => {
       actions.doAsyncSuccess();
-      resolve();
-    }, 1000);
-  })
+    }, 1000)
 };

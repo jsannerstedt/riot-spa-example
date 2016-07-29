@@ -1,4 +1,3 @@
-'use strict';
-require('babel-register');
-var server = require('./server').default;
+import server from './server';
+
 server(process.env.PORT || 3000);

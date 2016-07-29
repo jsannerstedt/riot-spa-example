@@ -1,28 +1,42 @@
-'use strict';
-
 import express from 'express';
 import riot from 'riot';
-import '../src/views';
-import '../src/components';
-import appTag from '../src/app.tag';
-import { createStore } from 'dedux';
-import router from '../src/utils/router';
-import routes from '../src/config/routes';
+import '../src/tags';
+import createApp from 'dedux-app';
+import doRoute from '../src/utils/router';
+import initRoutes from '../src/config/routes';
 import modifiers from '../src/modifiers';
-import actions from '../src/actions';
+import actionHandlers from '../src/actionHandlers';
 
 export default port => {
   const app = express();
   app.use('/dist', express.static(__dirname + '/../dist'));
-  app.use(router(routes, handleRoute));
+  app.use(handleRoute);
   app.use(handleRender);
   app.listen(port);
 };
 
+function handleRoute(req, res, next) {
+  const { actions, store } = createApp(modifiers, actionHandlers);
+  const routes = initRoutes(actions);
+  const promises = doRoute(req.url, routes);
+
+  if(!promises){
+    next();
+    return;
+  }
+
+  Promise.all(promises())
+    .then(() => {
+      req.initialState = store.getState();
+      next();
+    })
+    .catch(next);
+}
+
 function handleRender(req, res) {
   const state = req.initialState;
   if (state) {
-    const html = riot.render(appTag, { state: state });
+    const html = riot.render('my-app', { state: state });
     res.send(renderFullPage(html, JSON.stringify(state)));
   }
 }
@@ -43,15 +57,4 @@ function renderFullPage(html, initialState) {
                 <script type="text/javascript" src="/dist/index.js"></script>
               </body>
             </html>`;
-}
-
-function handleRoute(result, req, res, next) {
-  const store = createStore(modifiers, actions);
-  const promises = result();
-  Promise.all(promises)
-    .then(() => {
-      req.initialState = store.getState();
-      next();
-    })
-    .catch(next);
 }

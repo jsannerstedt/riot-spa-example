@@ -1,14 +1,8 @@
-'use strict';
-
-import createRouter from '../utils/router';
-import routes from '../config/routes';
-const router = createRouter(routes);
-
 export default {
-  navigate: payload => {
-    const result = router.match(payload);
+  navigate: (actions, { href, router }) => {
+    const result = router(href);
     if (typeof history !== 'undefined') {
-      history.pushState(null, null, payload);
+      history.pushState(null, null, href);
     }
     result();
   }

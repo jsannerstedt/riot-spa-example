@@ -1,20 +1,15 @@
-'use strict';
-
-import actions from '../actions';
-import actionHandlers from '../actionHandlers';
-
-export default {
+export default actions => ({
   '/': () => [
-    actions.routeChange('/home')
+    actions.routeChange('home')
   ],
   '/home': () => [
-    actions.routeChange('/home')
+    actions.routeChange('home')
   ],
   '/about': () => [
-    actions.routeChange('/about')
+    actions.routeChange('about')
   ],
   '/async': () => [
-    actions.routeChange('/async'),
-    actionHandlers.async.doAsync()
+    actions.routeChange('async'),
+    actions.doAsync()
   ]
-};
+});

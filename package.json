@@ -1,37 +1,35 @@
 {
   "name": "riot-spa-example",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src",
     "build": "npm run build:js & npm run build:css",
-    "build:js": "watchify -t [ riotify --compact ] -t [ babelify ] -t [ envify --NODE_ENV development] -e src/index.js -v -d -o 'exorcist dist/index.js.map > dist/index.js'",
-    "build:css": "cat style/main.css | cleancss -o dist/main.css",
+    "build:js": "watchify -t [ riotify --compact --exclude css ] -t [ babelify ] -e src/index.js -v -d -o 'exorcist dist/index.js.map > dist/index.js'",
+    "build:css": "riot src/tags dist/main.css --export css -w",
     "client-server": "light-server -s . -p 1337 -w 'index.html' -w 'dist/index.js' -w 'style/**/*.css # npm run build:css # reloadcss'",
     "dev": "npm run build:js & npm run build:css & npm run client-server",
-    "server": "npm run build & nodemon server/app.js --watch dist --watch server"
+    "server": "npm run build & babel-watch server/app.js"
   },
   "author": "joel.sannerstedt@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "babel-register": "^6.3.13",
-    "express": "^4.13.3"
+    "babel-register": "6.11.6",
+    "dedux-app": "^1.0.0",
+    "express": "4.14.0",
+    "riot": "2.5.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-es2015-riot": "^1.0.0",
-    "babelify": "^7.2.0",
-    "clean-css": "^3.4.5",
-    "dedux": "https://github.com/jsannerstedt/dedux/archive/v1.0-beta.tar.gz",
-    "envify": "^3.4.0",
-    "eslint": "^1.10.3",
-    "eslint-config-airbnb": "^2.0.0",
-    "exorcist": "^0.4.0",
-    "light-server": "^1.0.6",
-    "nodemon": "^1.8.1",
-    "riot": "^2.2.4",
-    "riotify": "^0.1.2",
-    "watchify": "^3.6.1"
+    "babel-preset-es2015-riot": "1.1.0",
+    "babel-watch": "^2.0.2",
+    "babelify": "7.3.0",
+    "envify": "3.4.1",
+    "eslint": "3.1.1",
+    "exorcist": "0.4.0",
+    "light-server": "1.1.7",
+    "nodemon": "1.10.0",
+    "riotify": "1.0.1",
+    "watchify": "3.7.0"
   }
 }
