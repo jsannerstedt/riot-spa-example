@@ -4,19 +4,17 @@
   </ul>
 
   <script type="text/babel">
-    const menuItems = [
-      'home',
-      'async',
-      'about'
-    ];
+    const menuItems = ['home', 'async', 'about'];
 
     this.items = menuItems.map(item => ({ name: item, href: '/' + item }));
   </script>
+
   <style scoped>
     ul {
       margin: 0;
       padding: 0;
     }
+
     li {
       list-style: none;
       display: inline;

@@ -1,3 +1,3 @@
 <about-view>
-    <p>about</p>
+  <p>about</p>
 </about-view>

@@ -1,3 +1,3 @@
 <home-view>
-    <p>home</p>
+  <p>home</p>
 </home-view>
