@@ -1,6 +1,8 @@
 export default {
-  doAsync: actions =>
+  doAsync: actions => new Promise(resolve => {
     setTimeout(() => {
       actions.doAsyncSuccess();
-    }, 1000)
+      resolve();
+    }, 1000);
+  })
 };

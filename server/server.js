@@ -18,14 +18,19 @@ export default port => {
 function handleRoute(req, res, next) {
   const { actions, store } = createApp(modifiers, actionHandlers);
   const routes = initRoutes(actions);
-  const promises = doRoute(req.url, routes);
+  const execRoute = doRoute(req.url, routes);
 
-  if(!promises){
+  if(!execRoute){
     next();
     return;
   }
 
-  Promise.all(promises())
+  // execing the route will return an array of arrays with potential promises
+  const promises = execRoute().reduce((prev, curr) => prev.concat(curr));
+
+  // when all have completed, get the state
+  // this allows us to wait for api calls and such, before rendering
+  Promise.all(promises)
     .then(() => {
       req.initialState = store.getState();
       next();
